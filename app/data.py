@@ -74,12 +74,12 @@ class Database:
 
     def dataframe(self) -> DataFrame:
         """Return data in collection as a Pandas DataFrame."""
-        return DataFrame(self.col.find({}))
+        df = DataFrame(self.col.find({}))
+        return df.drop(columns="_id")
 
     def html_table(self) -> str:
         """Return data in collection as an html table."""
-        df = self.dataframe()
-        return df.drop(columns='_id').to_html()
+        return self.dataframe().to_html()
 
 
 def monster_to_dict():
@@ -98,6 +98,5 @@ def monster_to_dict():
 
 
 if __name__ == '__main__':
-    db = Database()
-    db.reset()
-    db.seed(1000)
+    df = Database().dataframe()
+    print(df.head())
