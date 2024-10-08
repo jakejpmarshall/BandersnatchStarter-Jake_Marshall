@@ -1,4 +1,3 @@
-from pandas import DataFrame
 from sklearn.ensemble import RandomForestClassifier
 import joblib
 import time
@@ -6,7 +5,7 @@ import time
 
 class Machine:
 
-    def __init__(self, df: DataFrame):
+    def __init__(self, df):
         target = [int(x.split()[1]) for x in df['Rarity']]
         features = df.drop(columns=['Rarity'])
         mod = RandomForestClassifier(random_state=42)
